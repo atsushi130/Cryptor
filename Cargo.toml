@@ -1,0 +1,7 @@
+[package]
+name = "encrypter"
+version = "1.0.0"
+authors = ["atsushi130 <atsushi_main@outlook.jp>"]
+
+[dependencies]
+lazy_static = "*"
