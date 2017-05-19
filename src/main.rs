@@ -3,14 +3,18 @@
 extern crate lazy_static;
 
 /// domain module
-mod domain;
+pub mod domain;
+#[allow(unused_imports)]
 use domain::{ Enigma, Router, Reflector, Plugboard, SubstitutionTable };
+#[allow(unused_imports)]
 use domain::{ Encrypter, EncryptValue };
+#[allow(unused_imports)]
 use domain::{ SUBSTITUTION_TABLE1, SUBSTITUTION_TABLE2, SUBSTITUTION_TABLE3, REFLECTOR, PLUGBOARD };
 
 /// utility module
 mod utility;
 
+#[cfg(not(test))]
 fn main() {
     let mut encrypter = Encrypter {
         hash: Enigma::new(
