@@ -5,3 +5,7 @@ authors = ["atsushi130 <atsushi_main@outlook.jp>"]
 
 [dependencies]
 lazy_static = "*"
+
+[lib]
+name = "encrypter"
+path = "./src/main.rs"
