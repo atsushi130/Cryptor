@@ -52,7 +52,6 @@ $ cargo run
 ```
 
 ## Test
-test
 ```console
 $ cargo test
 ```
