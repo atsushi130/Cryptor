@@ -1,7 +1,12 @@
 [package]
-name = "cryptor"
-version = "0.1.0"
-authors = ["atsushi130 <atsushi_main@outlook.jp>"]
+name        = "cryptor"
+version     = "0.1.0"
+authors     = ["atsushi130 <atsushi_main@outlook.jp>"]
+license     = "MIT"
+description = "Cryptor is encryption machine corresponding to the diversity of algorithms."
+readme      = "README.md"
+repository  = "https://github.com/atsushi130/Cryptor"
+keywords    = ["enigma", "cipher", "encrypt", "decrypt"]
 
 [dependencies]
 lazy_static = "0.2.8"
