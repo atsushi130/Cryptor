@@ -2,18 +2,25 @@
 #[macro_use]
 extern crate lazy_static;
 
-/// domain module
-mod domain;
-use domain::{ Enigma, Router, Reflector, Plugboard, SubstitutionTable };
-use domain::{ Encrypter, EncryptValue };
-use domain::{ SUBSTITUTION_TABLE1, SUBSTITUTION_TABLE2, SUBSTITUTION_TABLE3, REFLECTOR, PLUGBOARD };
+extern crate base64;
+
+/// cryptor module
+pub mod cryptor;
+
+#[allow(unused_imports)]
+use cryptor::{ Enigma, Router, Reflector, Plugboard, SubstitutionTable };
+#[allow(unused_imports)]
+use cryptor::{ Cryptor, CryptoValue };
+#[allow(unused_imports)]
+use cryptor::{ SUBSTITUTION_TABLE1, SUBSTITUTION_TABLE2, SUBSTITUTION_TABLE3, REFLECTOR, PLUGBOARD };
 
 /// utility module
 mod utility;
 
+#[cfg(not(test))]
 fn main() {
-    let mut encrypter = Encrypter {
-        hash: Enigma::new(
+    let mut cryptor = Cryptor {
+        algorithm: Enigma::new(
             vec![
                 Router::new(SubstitutionTable::new(SUBSTITUTION_TABLE1.to_vec())),
                 Router::new(SubstitutionTable::new(SUBSTITUTION_TABLE2.to_vec())),
@@ -24,12 +31,12 @@ fn main() {
         )
     };
 
-    let characters = "RBUSDGWMG EE CBGAYRV";
+    let characters1 = "0V+/;e.\"%¥HN=P\"%WLkKC=xK[N<(DemmE=+.D\"bErC#X!|^G.{#5:KVr";
+    let characters2 = "**~_}*jl\'*fK\'=eG\'\'sP\'\\n<MMY@";
 
-    print!("Encrypt string: [ {} => ", characters);
-    for character in characters.chars() {
-        let encrypted_value: EncryptValue<Enigma> = encrypter.encrypt(&character);
-        print!("{}", encrypted_value.text);
-    }
-    println!(" ]");
+    let crypto_value1: CryptoValue<Enigma> = cryptor.encrypt(&characters1);
+    let crypto_value2: CryptoValue<Enigma> = cryptor.decrypt(&characters2);
+
+    println!("crypto: {}", crypto_value1.text);
+    println!("crypto: {}", crypto_value2.text);
 }
