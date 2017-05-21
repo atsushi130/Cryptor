@@ -49,13 +49,28 @@ let decrypted: CryptoValue<YourAlgorithm> = cryptor.decrypt(&string);
 println!("decrypted string is {}", decrypted.text);
 ```
 
+Encrypter have member with Algorithm trait. Dependency injection your implemented structure to Encrypter.
+```rust
+let mut encrypter = Encrypter {
+    hash: YourAlgorithm { ... }
+};
+```
+
+Return type of encrypt method is `EncryptValue<YourAlgorithm>`;
+```rust
+let encrypted: EncryptValue<YourAlgorithm> = encrypter.encrypt(&character);
+println!("encrypted character is {}", encrypted.text);
+```
+
 ## Run
 ```console
 ❯ cargo build
 ❯ cargo run
+
 ```
 
 ## Test
 ```console
 ❯ cargo test
+
 ```

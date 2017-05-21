@@ -34,7 +34,7 @@ fn main() {
     let characters1 = "0V+/;e.\"%¥HN=P\"%WLkKC=xK[N<(DemmE=+.D\"bErC#X!|^G.{#5:KVr";
     let characters2 = "**~_}*jl\'*fK\'=eG\'\'sP\'\\n<MMY@";
 
-    let crypto_value1: CryptoValue<Enigma> = cryptor.encrypt(&characters1);
+    let crypto_value1: CryptoValue<Enigma> = cryptor.decrypt(&characters1);
     let crypto_value2: CryptoValue<Enigma> = cryptor.decrypt(&characters2);
 
     println!("crypto: {}", crypto_value1.text);
