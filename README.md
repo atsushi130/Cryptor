@@ -1,5 +1,5 @@
 # Cryptor
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
 
@@ -81,3 +81,6 @@ println!("encrypted character is {}", encrypted.text);
 ❯ cargo test
 
 ```
+
+## LICENSE
+**MIT**
