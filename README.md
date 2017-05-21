@@ -27,6 +27,9 @@ or
 ❯ cargo add cryptor --path=lib/cryptor/
 ```
 
+## Default Crypto algorithm
+- [Enigma](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
+
 ## Usage
 Implement structure with this Algorithm trait.
 ```rust
