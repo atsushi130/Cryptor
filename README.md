@@ -90,4 +90,4 @@ println!("encrypted character is {}", encrypted.text);
 ```
 
 ## LICENSE
-**MIT**
+**This project is dual-licensed under MIT and Apache 2.0.**
