@@ -31,6 +31,13 @@ or
 - [Enigma](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
 
 ## Usage
+
+Import modules
+```rust
+extern crate cryptor;
+use cryptor::cryptor::{ Cryptor, CryptoValue, Algorithm };
+```
+
 Implement structure with this Algorithm trait.
 ```rust
 pub trait Algorithm {

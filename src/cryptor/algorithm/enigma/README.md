@@ -1,6 +1,14 @@
 # Enigma
 
 ## Usage
+**Import modules**
+```rust
+extern crate cryptor;
+use cryptor::cryptor::{ Enigma, Router, Reflector, Plugboard, SubstitutionTable };
+use cryptor::cryptor::{ Cryptor, CryptoValue };
+use cryptor::cryptor::{ SUBSTITUTION_TABLE1, SUBSTITUTION_TABLE2, SUBSTITUTION_TABLE3, REFLECTOR, PLUGBOARD };
+```
+
 **Setup Enigma**  
 Enigma factory method is `Enigma::new(Vec<Router>, Plugboard, Reflector) -> Self`. You can also use customized substitution table by yourself.
 ```rust
