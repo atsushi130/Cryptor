@@ -1,4 +1,5 @@
 # Enigma
+[![Enigma](https://img.shields.io/badge/Cryptor-Enigma-green.svg)](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
 
 ## Usage
 **Import modules**
