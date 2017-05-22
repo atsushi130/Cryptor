@@ -1,5 +1,5 @@
 # Cryptor
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
+[![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual license-MIT / Apache 2.0-blue.svg)](./LICENSE.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
 
