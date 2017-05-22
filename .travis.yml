@@ -22,3 +22,7 @@ after_success:
             --exclude-pattern=/.cargo \
             target/kcov target/debug/cryptor-*
       fi
+env:
+  global:
+  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+  - secure: dyilczkoadnM9t3foX/VkyIJLZEs2E2wwuXoD6QmTQS0AIv85ZWs0IaQlIgLHlYq2FTrZ8FFFYU6aLzY7VrIs/mP91v0o0ucs+Fb2Bh5cvDsBu2ue9hUgraADS2EIjamTF/Yzhnx8RhHDFQuXbMY7IpvkbyYA9yKTYsn4TMLwhk277H6HvTpWYopcIzm8L4ZFfBIJ+f616jmPS6qM0Fj17bWnVn6ta4DxVRi+2RBaYEo5u++c2qCzuv6WWTYVVYhbwVjNbMCfWoZrPvAbzsGR8A2Tu6aHmDBAL+oyIIOg+fnMSu0hwO83Mhv2Nk9CQjUbFRL2iTifvMArAgbMW+wq8crcDmub/rr+r/ua+/Bx1RCy9WnW33uu2uPefGTT7uDJUOweItraDhd4Jkma4VxJ2sF+EmK4CB2KcGzcgAZCB7QQCS29QZZHnBVfsS5UN0MtiHchiYc9OuFBBV/TyJL+WliEHuMjgD3sEQRBtSTpIwoQfMebEUCih4RcdzjirIyONAULeU8e+JyoOvlLSq+0zYqW/g27JxdyKNVlK17DHaaBm5EZ3oLnvvn6eYpSJbX2bWHRQqsA/5EPw/tGDuIwKVEAf/EUCeet4h3mORDRQIgvAG0u9mpAD86mHS2RPkHEu/1qSNv3wz/jsojtmBo+qQ8b7EAADvT/E0PBb5bsxI=
