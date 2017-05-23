@@ -6,3 +6,4 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 pub mod enigma;
+pub mod base64;
