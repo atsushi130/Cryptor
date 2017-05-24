@@ -8,6 +8,7 @@
 mod algorithm;
 mod crypto_value;
 mod enigma;
+mod base64;
 
 pub use self::algorithm::Algorithm;
 pub use self::crypto_value::CryptoValue;
@@ -26,3 +27,5 @@ pub use self::enigma::SUBSTITUTION_TABLE2;
 pub use self::enigma::SUBSTITUTION_TABLE3;
 pub use self::enigma::REFLECTOR;
 pub use self::enigma::PLUGBOARD;
+
+pub use self::base64::Base64;

@@ -5,5 +5,5 @@
 // or the MIT license <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // This file may not be copied, modified, or distributed except according to those terms.
 
-pub mod enigma;
-pub mod base64;
+mod base64;
+pub use self::base64::Base64;

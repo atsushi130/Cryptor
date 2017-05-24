@@ -2,6 +2,7 @@
 [![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./LICENSE.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
+[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.1/cryptor/)
 
 Cryptor is encryption machine corresponding to the diversity of algorithms.
 
@@ -9,7 +10,7 @@ Cryptor is encryption machine corresponding to the diversity of algorithms.
 Insert to Cargo.toml of your project.
 ```toml
 [dependencies]
-cryptor = "0.1.0"
+cryptor = "0.1.2"
 ```
 or
 ```console
@@ -17,7 +18,7 @@ or
 ❯ cargo add cryptor
 
 // Version specification
-❯ cargo add cryptor@0.1.0
+❯ cargo add cryptor@0.1.2
 
 // If not exist on crates.io
 ❯ mkdir lib
@@ -27,8 +28,9 @@ or
 ❯ cargo add cryptor --path=lib/cryptor/
 ```
 
-## Default Crypto algorithm
-- [Enigma](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
+## Default crypto algorithm
+- [![Enigma](https://img.shields.io/badge/Cryptor-Enigma-6fb536.svg)](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
+- [![Base64](https://img.shields.io/badge/Cryptor-Base64-6fb536.svg)](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/base64)
 
 ## Usage
 
@@ -70,7 +72,7 @@ let mut encrypter = Encrypter {
 };
 ```
 
-Return type of encrypt method is `EncryptValue<YourAlgorithm>`;
+Return type of encrypt method is `EncryptValue<YourAlgorithm>`.
 ```rust
 let encrypted: EncryptValue<YourAlgorithm> = encrypter.encrypt(&character);
 println!("encrypted character is {}", encrypted.text);

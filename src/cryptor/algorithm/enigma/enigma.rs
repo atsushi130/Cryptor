@@ -5,11 +5,11 @@
 // or the MIT license <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // This file may not be copied, modified, or distributed except according to those terms.
 
-/// data_encoding module
-use base64::{ encode, decode };
+/// cryptor module
+use super::super::super::Cryptor;
 
 /// algorithm module
-use super::super::{Algorithm, CryptoValue};
+use super::super::{ Algorithm, CryptoValue, Base64 };
 
 /// enigma module
 use super::{ Router, Reflector, RouterManager, Plugboard };
@@ -73,12 +73,18 @@ impl Enigma {
     }
 
     fn encode_base64(&self, string: &str) -> String {
-        let bytes = string.as_bytes();
-        encode(&bytes)
+        let mut cryptor = self.build_base64_cryptor();
+        cryptor.encrypt(string).text
     }
 
     fn decode_base64(&self, string: &str) -> String {
-        let bytes = decode(string).unwrap();
-        String::from_utf8(bytes).unwrap()
+        let mut cryptor = self.build_base64_cryptor();
+        cryptor.decrypt(string).text
+    }
+
+    fn build_base64_cryptor(&self) -> Cryptor<Base64> {
+        Cryptor {
+            algorithm: Base64
+        }
     }
 }
