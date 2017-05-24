@@ -25,8 +25,8 @@ mod utility;
 
 #[cfg(not(test))]
 fn main() {
-    let mut cryptor = Cryptor {
-        algorithm: Enigma::new(
+
+    let enigma = Enigma::new(
             vec![
                 Router::new(SubstitutionTable::new(SUBSTITUTION_TABLE1.to_vec())),
                 Router::new(SubstitutionTable::new(SUBSTITUTION_TABLE2.to_vec())),
@@ -34,8 +34,9 @@ fn main() {
             ],
             Plugboard::new(SubstitutionTable::new(PLUGBOARD.to_vec())),
             Reflector::new(SubstitutionTable::new(REFLECTOR.to_vec()))
-        )
-    };
+        );
+
+    let mut cryptor = Cryptor::new(enigma);
 
     let characters1 = "0V+/;e.\"%¥HN=P\"%WLkKC=xK[N<(DemmE=+.D\"bErC#X!|^G.{#5:KVr";
     let characters2 = "**~_}*jl\'*fK\'=eG\'\'sP\'\\n<MMY@";

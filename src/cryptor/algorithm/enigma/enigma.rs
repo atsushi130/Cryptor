@@ -83,8 +83,6 @@ impl Enigma {
     }
 
     fn build_base64_cryptor(&self) -> Cryptor<Base64> {
-        Cryptor {
-            algorithm: Base64
-        }
+        Cryptor::new(Base64)
     }
 }
