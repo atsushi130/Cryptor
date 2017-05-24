@@ -14,6 +14,12 @@ pub struct Cryptor<T: Algorithm> {
 
 impl<T: Algorithm> Cryptor<T> {
 
+    pub fn new(algorithm: T) -> Self {
+        Cryptor {
+            algorithm
+        }
+    }
+
     pub fn encrypt(&mut self, string: &str) -> CryptoValue<T::V> {
         self.algorithm.encrypt(string)
     }
