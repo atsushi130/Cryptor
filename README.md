@@ -63,12 +63,6 @@ let decrypted: CryptoValue<YourAlgorithm> = cryptor.decrypt(&string);
 println!("decrypted string is {}", decrypted.text);
 ```
 
-Return type of encrypt method is `EncryptValue<YourAlgorithm>`.
-```rust
-let encrypted: EncryptValue<YourAlgorithm> = encrypter.encrypt(&character);
-println!("encrypted character is {}", encrypted.text);
-```
-
 ## Run
 ```console
 ❯ cargo build
