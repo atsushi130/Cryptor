@@ -17,9 +17,7 @@ mod encrypter_tests {
     #[test]
     fn encryptable() {
 
-        #[allow(unused_mut)]
-        let mut encrypter = Cryptor {
-            algorithm: Enigma::new(
+        let enigma = Enigma::new(
                 vec![
                     Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
                     Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
@@ -27,19 +25,19 @@ mod encrypter_tests {
                 ],
                 Plugboard::new(SubstitutionTable::new(ALPHABETS.to_vec())),
                 Reflector::new(SubstitutionTable::new(ALPHABETS.to_vec()))
-            )
-        };
+            );
 
-        let result: CryptoValue<Enigma> = encrypter.encrypt(&'A');
-        assert_eq!("A", result.text);
+        #[allow(unused_mut)]
+        let mut encrypter = Cryptor::new(enigma);
+
+        let result: CryptoValue<Enigma> = encrypter.encrypt(&"A");
+        assert_eq!("QQ==", result.text);
     }
 
     #[test]
     fn encryptable_two_characters() {
 
-        #[allow(unused_mut)]
-        let mut encrypter = Cryptor {
-            algorithm: Enigma::new(
+        let enigma = Enigma::new(
                 vec![
                     Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
                     Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
@@ -47,13 +45,15 @@ mod encrypter_tests {
                 ],
                 Plugboard::new(SubstitutionTable::new(ALPHABETS.to_vec())),
                 Reflector::new(SubstitutionTable::new(ALPHABETS.to_vec()))
-            )
-        };
+            );
 
-        let result1: CryptoValue<Enigma> = encrypter.encrypt(&'A');
-        let result2: CryptoValue<Enigma> = encrypter.encrypt(&'A');
+        #[allow(unused_mut)]
+        let mut encrypter = Cryptor::new(enigma);
 
-        assert_eq!("A", result1.text);
-        assert_eq!("A", result2.text);
+        let result1: CryptoValue<Enigma> = encrypter.encrypt(&"A");
+        let result2: CryptoValue<Enigma> = encrypter.encrypt(&"A");
+
+        assert_eq!("QQ==", result1.text);
+        assert_eq!("QQ==", result2.text);
     }
 }
