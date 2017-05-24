@@ -2,7 +2,7 @@
 [![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./LICENSE.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
-[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.1/cryptor/)
+[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.2/cryptor/)
 
 Cryptor is encryption machine corresponding to the diversity of algorithms.
 
@@ -56,7 +56,7 @@ let mut cryptor = Cryptor {
 };
 ```
 
-Return type of encrypt and decrypt method is `CryptoValue<YourAlgorithm>`;
+Return type of encrypt and decrypt method is `CryptoValue<YourAlgorithm>`.
 ```rust
 let encrypted: CryptoValue<YourAlgorithm> = cryptor.encrypt(&string);
 println!("encrypted string is {}", encrypted.text);
