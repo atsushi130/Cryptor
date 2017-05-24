@@ -1,8 +1,8 @@
 # Cryptor
-[![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./LICENSE.md)
+[![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./LICENSE-MIT.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
-[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.2/cryptor/)
+[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.3/cryptor/)
 
 Cryptor is encryption machine corresponding to the diversity of algorithms.
 
@@ -10,7 +10,7 @@ Cryptor is encryption machine corresponding to the diversity of algorithms.
 Insert to Cargo.toml of your project.
 ```toml
 [dependencies]
-cryptor = "0.1.2"
+cryptor = "0.1.3"
 ```
 or
 ```console
@@ -18,7 +18,7 @@ or
 ❯ cargo add cryptor
 
 // Version specification
-❯ cargo add cryptor@0.1.2
+❯ cargo add cryptor@0.1.3
 
 // If not exist on crates.io
 ❯ mkdir lib
@@ -51,9 +51,7 @@ pub trait Algorithm {
 
 Cryptor have member with Algorithm trait. Dependency injection your implemented structure to Cryptor.
 ```rust
-let mut cryptor = Cryptor {
-    algorithm: YourAlgorithm { ... }
-};
+let mut cryptor = Cryptor::new(YourAlgorithm);
 ```
 
 Return type of encrypt and decrypt method is `CryptoValue<YourAlgorithm>`.
@@ -63,13 +61,6 @@ println!("encrypted string is {}", encrypted.text);
 
 let decrypted: CryptoValue<YourAlgorithm> = cryptor.decrypt(&string);
 println!("decrypted string is {}", decrypted.text);
-```
-
-Encrypter have member with Algorithm trait. Dependency injection your implemented structure to Encrypter.
-```rust
-let mut encrypter = Encrypter {
-    hash: YourAlgorithm { ... }
-};
 ```
 
 Return type of encrypt method is `EncryptValue<YourAlgorithm>`.
@@ -89,6 +80,24 @@ println!("encrypted character is {}", encrypted.text);
 ```console
 ❯ cargo test
 
+```
+
+## Change logs
+**v0.1.3**  
+Defined associated function to builds new Cryptor.
+```rust
+impl<T: Algorithm> Cryptor<T> {
+    pub fn new(algorithm: T) -> Self {
+        Cryptor {
+            algorithm
+        }
+    }
+}
+```
+
+**changed usage**
+```rust
+let mut cryptor = Cryptor::new(your_algorithm);
 ```
 
 ## LICENSE
