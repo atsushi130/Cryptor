@@ -26,3 +26,5 @@ pub use self::algorithm::SUBSTITUTION_TABLE2;
 pub use self::algorithm::SUBSTITUTION_TABLE3;
 pub use self::algorithm::REFLECTOR;
 pub use self::algorithm::PLUGBOARD;
+
+pub use self::algorithm::Base64;
