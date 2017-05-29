@@ -9,7 +9,7 @@
 use base64::{ encode, decode };
 
 /// algorithm module
-use super::super::{Algorithm, CryptoValue};
+use super::super::{ Algorithm, CryptoValue, CryptoError };
 
 pub struct Base64;
 
@@ -17,15 +17,15 @@ impl Algorithm for Base64 {
 
     type V = Base64;
 
-    fn encrypt(&mut self, string: &str) -> CryptoValue<Self::V> {
+    fn encrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError> {
         let bytes   = string.as_bytes();
         let encoded = encode(&bytes);
-        CryptoValue::new(&encoded)
+        Ok(CryptoValue::new(&encoded))
     }
 
-    fn decrypt(&mut self, string: &str) -> CryptoValue<Self::V> {
-        let bytes = decode(string).unwrap();
-        let decoded = String::from_utf8(bytes).unwrap();
-        CryptoValue::new(&decoded)
+    fn decrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError> {
+        let bytes   = try!(decode(string));
+        let decoded = try!(String::from_utf8(bytes));
+        Ok(CryptoValue::new(&decoded))
     }
 }

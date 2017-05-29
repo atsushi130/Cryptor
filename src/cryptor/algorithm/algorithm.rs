@@ -6,11 +6,10 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 /// algorithm module
-use super::CryptoValue;
+use super::{ CryptoValue, CryptoError };
 
 pub trait Algorithm {
     type V: Algorithm;
-    fn encrypt(&mut self, string: &str) -> CryptoValue<Self::V>;
-    fn decrypt(&mut self, string: &str) -> CryptoValue<Self::V>;
+    fn encrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError>;
+    fn decrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError>;
 }
-

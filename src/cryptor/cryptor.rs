@@ -6,7 +6,7 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 /// algorithm module
-use super::{ Algorithm, CryptoValue };
+use super::{ Algorithm, CryptoValue, CryptoError };
 
 pub struct Cryptor<T: Algorithm> {
     pub algorithm: T
@@ -20,11 +20,11 @@ impl<T: Algorithm> Cryptor<T> {
         }
     }
 
-    pub fn encrypt(&mut self, string: &str) -> CryptoValue<T::V> {
+    pub fn encrypt(&mut self, string: &str) -> Result<CryptoValue<T::V>, CryptoError> {
         self.algorithm.encrypt(string)
     }
 
-    pub fn decrypt(&mut self, string: &str) -> CryptoValue<T::V> {
+    pub fn decrypt(&mut self, string: &str) -> Result<CryptoValue<T::V>, CryptoError> {
         self.algorithm.decrypt(string)
     }
 }
