@@ -1,6 +1,6 @@
 # Enigma
 [![Enigma](https://img.shields.io/badge/Cryptor-Enigma-6fb536.svg)](https://github.com/atsushi130/Cryptor/tree/master/src/cryptor/algorithm/enigma)
-[![Document](https://img.shields.io/badge/Enigma-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.3/cryptor/cryptor/struct.Enigma.html)
+[![Document](https://img.shields.io/badge/Enigma-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.4/cryptor/cryptor/struct.Enigma.html)
 
 ## Usage
 **Import modules**
@@ -32,18 +32,25 @@ let mut cryptor = Cryptor::new(enigma);
 
 **Encryption**  
 ```rust
-let encrypted: CryptoValue<Enigma> = cryptor.encrypt(&"A quick brown fox jumps over the lazy dog.");
-println!("encrypted: {}", encrypted.text);
+match cryptor.encrypt(&"A quick brown fox jumps over the lazy dog.") {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text),
+    Err(ref error)  => println!("{}", error)
+}
 ```
 
 **Decryption**  
 ```rust
-let decrypted: CryptoValue<Enigma> = cryptor.encrypt(&encrypted);
-println!("decrypted: {}", decrypted); // decrypted: A quick brown fox jumps over the lazy dog.
+match cryptor.decrypt(&string) {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text), // crypted: A quick brown fox jumps over the lazy dog.
+    Err(ref error)  => println!("{}", error)
+}
 ```
 
 **Set router's position**  
 To set the position, specify a character string. The length of the specified string must be equal to the number of routers.
-```
-cryptor.algorithm.set_positons("ABC");
+```rust
+match cryptor.algorithm.set_positons("ABC") {
+    Ok(_)          => println!("set positions."),
+    Err(ref error) => println!("{}", error)
+}
 ```
