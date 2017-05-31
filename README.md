@@ -2,7 +2,7 @@
 [![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./LICENSE-MIT.md)
 [![Travis Build Status](https://api.travis-ci.org/atsushi130/Cryptor.svg?branch=master)](https://travis-ci.org/atsushi130/Cryptor)
 [![crates.io](https://img.shields.io/crates/v/cryptor.svg)](https://crates.io/crates/cryptor)
-[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.3/cryptor/)
+[![Document](https://img.shields.io/badge/Cryptor-Document-3B5998.svg)](https://docs.rs/cryptor/0.1.4/cryptor/)
 
 Cryptor is encryption machine corresponding to the diversity of algorithms.
 
@@ -10,7 +10,7 @@ Cryptor is encryption machine corresponding to the diversity of algorithms.
 Insert to Cargo.toml of your project.
 ```toml
 [dependencies]
-cryptor = "0.1.3"
+cryptor = "0.1.4"
 ```
 or
 ```console
@@ -18,7 +18,7 @@ or
 ❯ cargo add cryptor
 
 // Version specification
-❯ cargo add cryptor@0.1.3
+❯ cargo add cryptor@0.1.4
 
 // If not exist on crates.io
 ❯ mkdir lib
@@ -77,21 +77,38 @@ println!("decrypted string is {}", decrypted.text);
 ```
 
 ## Change logs
-**v0.1.3**  
-Defined associated function to builds new Cryptor.
+**v0.1.4**  
+Add exception of Cryptor and Enigma.
+
+**CryptoError**
 ```rust
-impl<T: Algorithm> Cryptor<T> {
-    pub fn new(algorithm: T) -> Self {
-        Cryptor {
-            algorithm
-        }
-    }
+pub enum CryptoError {
+    InvalidString(String),
+    InvalidByte(usize, u8, DecodeError),
+    InvalidLength(DecodeError),
+    UTF8Error(FromUtf8Error)
+}
+```
+
+**EnigmaError**
+```rust
+pub enum EnigmaError {
+    InvalidLength
 }
 ```
 
 **changed usage**
 ```rust
 let mut cryptor = Cryptor::new(your_algorithm);
+match cryptor.encrypt(string) {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text),
+    Err(ref error)  => println!("{}", error)
+}
+
+match cryptor.decrypt(string) {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text),
+    Err(ref error)  => println!("{}", error)
+}
 ```
 
 ## LICENSE
