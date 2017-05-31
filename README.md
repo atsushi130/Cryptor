@@ -37,15 +37,15 @@ or
 Import modules
 ```rust
 extern crate cryptor;
-use cryptor::cryptor::{ Cryptor, CryptoValue, Algorithm };
+use cryptor::cryptor::{ Cryptor, CryptoValue, CryptoError, Algorithm };
 ```
 
 Implement structure with this Algorithm trait.
 ```rust
 pub trait Algorithm {
     type V: Algorithm;
-    fn encrypt(&mut self, character: &char) -> CryptoValue<Self::V>;
-    fn decrypt(&mut self, character: &char) -> CryptoValue<Self::V>;
+    fn encrypt(&mut self, character: &char) -> Result<CryptoValue<Self::V>, CryptoError>;
+    fn decrypt(&mut self, character: &char) -> Result<CryptoValue<Self::V>, CryptoError>;
 }
 ```
 
@@ -54,13 +54,17 @@ Cryptor have member with Algorithm trait. Dependency injection your implemented 
 let mut cryptor = Cryptor::new(YourAlgorithm);
 ```
 
-Return type of encrypt and decrypt method is `CryptoValue<YourAlgorithm>`.
+Return type of encrypt and decrypt method is `Result<CryptoValue<YourAlgorithm>, CryptoError>`.
 ```rust
-let encrypted: CryptoValue<YourAlgorithm> = cryptor.encrypt(&string);
-println!("encrypted string is {}", encrypted.text);
+match cryptor.encrypt(&string) {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text),
+    Err(ref error)  => println!("{}", error)
+}
 
-let decrypted: CryptoValue<YourAlgorithm> = cryptor.decrypt(&string);
-println!("decrypted string is {}", decrypted.text);
+match cryptor.decrypt(&string) {
+    Ok(ref crypted) => println!("crypted: {}", crypted.text),
+    Err(ref error)  => println!("{}", error)
+}
 ```
 
 ## Run
