@@ -7,12 +7,15 @@
 
 mod algorithm;
 mod crypto_value;
+mod crypto_error;
 mod enigma;
 mod base64;
 
 pub use self::algorithm::Algorithm;
 pub use self::crypto_value::CryptoValue;
+pub use self::crypto_error::CryptoError;
 pub use self::enigma::Enigma;
+pub use self::enigma::EnigmaError;
 pub use self::enigma::Router;
 pub use self::enigma::RouterProtocol;
 pub use self::enigma::Digit;

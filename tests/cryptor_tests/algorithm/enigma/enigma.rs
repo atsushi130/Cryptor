@@ -11,7 +11,7 @@ extern crate cryptor;
 #[cfg(test)]
 mod enigma_tests {
 
-    use cryptor::cryptor::{ Enigma, Algorithm, Router, Reflector, CryptoValue, Plugboard, SubstitutionTable };
+    use cryptor::cryptor::{ Enigma, EnigmaError, Algorithm, Router, Reflector, Plugboard, SubstitutionTable };
     use cryptor::cryptor::{ ALPHABETS };
 
     #[test]
@@ -28,8 +28,10 @@ mod enigma_tests {
             Reflector::new(SubstitutionTable::new(ALPHABETS.to_vec()))
         );
 
-        let result: CryptoValue<Enigma> = enigma.encrypt(&"A");
-        assert_eq!("QQ==", result.text);
+        match enigma.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
     }
 
     #[test]
@@ -46,10 +48,34 @@ mod enigma_tests {
             Reflector::new(SubstitutionTable::new(ALPHABETS.to_vec()))
         );
 
-        let result1: CryptoValue<Enigma> = enigma.encrypt(&"A");
-        let result2: CryptoValue<Enigma> = enigma.encrypt(&"A");
+        match enigma.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
 
-        assert_eq!("QQ==", result1.text);
-        assert_eq!("QQ==", result2.text);
+        match enigma.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
+    }
+
+    #[test]
+    fn exception_handlable() {
+
+        #![allow(unused_mut)]
+        let mut enigma = Enigma::new(
+            vec![
+                Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
+                Router::new(SubstitutionTable::new(ALPHABETS.to_vec())),
+                Router::new(SubstitutionTable::new(ALPHABETS.to_vec()))
+            ],
+            Plugboard::new(SubstitutionTable::new(ALPHABETS.to_vec())),
+            Reflector::new(SubstitutionTable::new(ALPHABETS.to_vec()))
+        );
+
+        match enigma.set_positions("0000") {
+            Ok(_)      => assert!(false),
+            Err(error) => assert_eq!(EnigmaError::InvalidLength, error)
+        }
     }
 }

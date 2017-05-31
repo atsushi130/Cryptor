@@ -6,6 +6,7 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 mod enigma;
+mod enigma_error;
 mod substitution_table;
 mod router;
 mod router_manager;
@@ -14,6 +15,7 @@ mod plugboard;
 mod alphabets;
 
 pub use self::enigma::Enigma;
+pub use self::enigma_error::EnigmaError;
 pub use self::router::Router;
 pub use self::router::RouterProtocol;
 pub use self::router::Digit;

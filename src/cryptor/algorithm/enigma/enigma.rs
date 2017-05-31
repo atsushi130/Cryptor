@@ -9,10 +9,10 @@
 use super::super::super::Cryptor;
 
 /// algorithm module
-use super::super::{ Algorithm, CryptoValue, Base64 };
+use super::super::{ Algorithm, CryptoValue, CryptoError, Base64 };
 
 /// enigma module
-use super::{ Router, Reflector, RouterManager, Plugboard };
+use super::{ EnigmaError, Router, Reflector, RouterManager, Plugboard };
 
 pub struct Enigma {
     router_manager: RouterManager,
@@ -24,14 +24,15 @@ impl Algorithm for Enigma {
 
     type V = Enigma;
 
-    fn encrypt(&mut self, string: &str) -> CryptoValue<Self::V> {
+    fn encrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError> {
         let encrypted: Vec<String> = self.encode_base64(string).chars().map( |character| self.crypto(&character)).collect();
-        CryptoValue::new(&encrypted.join(""))
+        Ok(CryptoValue::new(&encrypted.join("")))
     }
 
-    fn decrypt(&mut self, string: &str) -> CryptoValue<Self::V> {
+    fn decrypt(&mut self, string: &str) -> Result<CryptoValue<Self::V>, CryptoError> {
         let decrypted: Vec<String> = string.chars().map( |character| self.crypto(&character)).collect();
-        CryptoValue::new(&self.decode_base64(&decrypted.join("")))
+        let decoded                = try!(self.decode_base64(&decrypted.join("")));
+        Ok(CryptoValue::new(&decoded))
     }
 }
 
@@ -47,17 +48,17 @@ impl Enigma {
         }
     }
 
-    pub fn set_positions(&mut self, positions: &str) -> &Self {
+    pub fn set_positions(&mut self, positions: &str) -> Result<&Self, EnigmaError> {
 
         if positions.chars().count() != self.router_manager.routers.len() {
-            panic!("The number of positions does not match the number of routers.");
+            return Err(EnigmaError::InvalidLength);
         }
 
         for (router, position) in self.router_manager.routers.iter_mut().zip(positions.chars()) {
             router.set_position(&position);
         }
 
-        return self
+        return Ok(self)
     }
 
     fn crypto(&mut self, character: &char) -> String {
@@ -74,12 +75,13 @@ impl Enigma {
 
     fn encode_base64(&self, string: &str) -> String {
         let mut cryptor = self.build_base64_cryptor();
-        cryptor.encrypt(string).text
+        cryptor.encrypt(string).unwrap().text
     }
 
-    fn decode_base64(&self, string: &str) -> String {
+    fn decode_base64(&self, string: &str) -> Result<String, CryptoError> {
         let mut cryptor = self.build_base64_cryptor();
-        cryptor.decrypt(string).text
+        let decrypted = try!(cryptor.decrypt(string));
+        Ok(decrypted.text)
     }
 
     fn build_base64_cryptor(&self) -> Cryptor<Base64> {

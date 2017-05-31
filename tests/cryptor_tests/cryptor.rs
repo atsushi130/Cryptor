@@ -11,7 +11,7 @@ extern crate cryptor;
 #[cfg(test)]
 mod encrypter_tests {
 
-    use cryptor::cryptor::{ Cryptor, Enigma, Router, Reflector, CryptoValue, Plugboard, SubstitutionTable };
+    use cryptor::cryptor::{ Cryptor, Enigma, Router, Reflector, Plugboard, SubstitutionTable };
     use cryptor::cryptor::{ ALPHABETS };
 
     #[test]
@@ -28,10 +28,12 @@ mod encrypter_tests {
             );
 
         #[allow(unused_mut)]
-        let mut encrypter = Cryptor::new(enigma);
+        let mut cryptor = Cryptor::new(enigma);
 
-        let result: CryptoValue<Enigma> = encrypter.encrypt(&"A");
-        assert_eq!("QQ==", result.text);
+        match cryptor.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
     }
 
     #[test]
@@ -48,12 +50,16 @@ mod encrypter_tests {
             );
 
         #[allow(unused_mut)]
-        let mut encrypter = Cryptor::new(enigma);
+        let mut cryptor = Cryptor::new(enigma);
 
-        let result1: CryptoValue<Enigma> = encrypter.encrypt(&"A");
-        let result2: CryptoValue<Enigma> = encrypter.encrypt(&"A");
+        match cryptor.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
 
-        assert_eq!("QQ==", result1.text);
-        assert_eq!("QQ==", result2.text);
+        match cryptor.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
     }
 }

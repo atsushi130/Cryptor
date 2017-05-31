@@ -6,14 +6,18 @@ mod base64_tests {
     #[test]
     fn encryptable() {
         let mut base64 = Base64;
-        let result = base64.encrypt("A");
-        assert_eq!("QQ==", result.text);
+        match base64.encrypt(&"A") {
+            Ok(ref result) => assert_eq!("QQ==", result.text),
+            Err(_)         => assert!(false)
+        }
     }
 
     #[test]
     fn decryptable() {
         let mut base64 = Base64;
-        let result = base64.decrypt("QQ==");
-        assert_eq!("A", result.text);
+        match base64.decrypt("QQ==") {
+            Ok(ref result) => assert_eq!("A", result.text),
+            Err(_)         => assert!(false)
+        }
     }
 }

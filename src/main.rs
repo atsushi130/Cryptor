@@ -41,9 +41,13 @@ fn main() {
     let characters1 = "0V+/;e.\"%¥HN=P\"%WLkKC=xK[N<(DemmE=+.D\"bErC#X!|^G.{#5:KVr";
     let characters2 = "**~_}*jl\'*fK\'=eG\'\'sP\'\\n<MMY@";
 
-    let crypto_value1: CryptoValue<Enigma> = cryptor.decrypt(&characters1);
-    let crypto_value2: CryptoValue<Enigma> = cryptor.decrypt(&characters2);
+    match cryptor.decrypt(&characters1) {
+        Ok(ref crypted) => println!("crypted: {}", crypted.text),
+        Err(ref error)  => println!("{}", error)
+    }
 
-    println!("crypto: {}", crypto_value1.text);
-    println!("crypto: {}", crypto_value2.text);
+    match cryptor.decrypt(&characters2) {
+        Ok(ref crypted) => println!("crypted: {}", crypted.text),
+        Err(ref error)  => println!("{}", error)
+    }
 }
